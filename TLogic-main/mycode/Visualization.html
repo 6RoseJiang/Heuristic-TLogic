@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visualization of Temporal Knowledge Graphs Reasoning</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
+    .container {
+      width: 80%;
+      margin: auto;
+      overflow: hidden;
+    }
+    header, footer {
+      background: #333;
+      color: #fff;
+      text-align: center;
+      padding: 1rem;
+    }
+    h2, h3 {
+      color: #333;
+    }
+    table {
+      width: 100%;
+      margin-top: 20px;
+      border-collapse: collapse;
+    }
+    table, th, td {
+      border: 1px solid #999;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    .content {
+      display: none;
+    }
+    button {
+      background-color: #4CAF50; /* Green */
+      color: white;
+      padding: 10px 24px;
+      margin: 10px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition-duration: 0.4s;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+<header>
+  <h1>Visualization of Temporal Knowledge Graphs Reasoning</h1>
+  <button onclick="showSection('heuristic')">Heuristic Temporal Walk Process</button>
+  <button onclick="showSection('experiment')">Experiment Result</button>
+</header>
+
+<div class="container">
+  <div id="heuristic" class="content">
+    <h2>Heuristic Temporal Walk</h2>
+    <img src="Heuristic_Reasoning_Process.png" alt="Heuristic Reasoning Process" style="width: 95%;">
+    <p>Edge rarity refers to the frequency of occurrence of a certain type of edge (i.e., a specific type of relationship between two entities) within a knowledge graph. If a particular type of relationship is uncommon in the graph, then that type of edge is considered rare. My algorithm favors the selection of rare edges for the next step in reasoning. This is because rare relationships may contain more valuable or insightful information. For instance, if most countries maintain normal relations with other countries, but only a few countries impose sanctions on others, then the "sanction" relationship is rare and thus might be deemed more worthy of exploration.
+    </p>
+  </div>
+
+  <div id="experiment" class="content">
+    <h2>Method Comparison</h2>
+    <h3>Learning and Application Performance</h3>
+    <table>
+      <tr>
+        <th>Metric</th>
+        <th>Temporal Logic Walk</th>
+        <th>Heuristic Walk</th>
+      </tr>
+      <tr>
+        <td>Learning Time (s)</td>
+        <td>283.65</td>
+        <td>154.48</td>
+      </tr>
+      <tr>
+        <td>Number of Relations with Rules</td>
+        <td>427</td>
+        <td>433</td>
+      </tr>
+      <tr>
+        <td>Total Number of Rules</td>
+        <td>26,881</td>
+        <td>32,520</td>
+      </tr>
+      <tr>
+        <td>Application Time (s)</td>
+        <td>2932.91</td>
+        <td>920.98</td>
+      </tr>
+      <tr>
+        <td>Queries with No Candidates</td>
+        <td>880</td>
+        <td>911</td>
+      </tr>
+    </table>
+
+    <h3>Rules by Length Distribution</h3>
+    <table>
+      <tr>
+        <th>Rule Length</th>
+        <th>Temporal Logic Walk</th>
+        <th>Heuristic Walk</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>7847</td>
+        <td>13138</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>7328</td>
+        <td>8208</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>11706</td>
+        <td>11174</td>
+      </tr>
+    </table>
+
+    <h3>Performance Metrics</h3>
+    <table>
+      <tr>
+        <th>Metric</th>
+        <th>Temporal Logic Walk</th>
+        <th>Heuristic Walk</th>
+      </tr>
+      <tr>
+        <td>Hits@1</td>
+        <td>0.335577</td>
+        <td>0.314249</td>
+      </tr>
+      <tr>
+        <td>Hits@3</td>
+        <td>0.482718</td>
+        <td>0.47039</td>
+      </tr>
+      <tr>
+        <td>Hits@10</td>
+        <td>0.612275</td>
+        <td>0.595939</td>
+      </tr>
+      <tr>
+        <td>MRR</td>
+        <td>0.430424</td>
+        <td>0.412585</td>
+      </tr>
+    </table>
+    </section>
+
+    <section>
+      <h2>Heuristic Walk Methodology</h2>
+      <p>The Heuristic Walk introduces a novel approach by prioritizing edges based on their rarity, aiming to uncover more significant patterns within the graph. This strategy not only accelerates the learning process but also enables the discovery of nuanced rules, thereby enhancing the overall effectiveness of knowledge graph reasoning.</p>
+    </section>
+  </div>
+</div>
+
+<footer>
+  <p>Research by [Ziyan Jiang]. © 2024</p>
+</footer>
+
+<script>
+  function showSection(sectionId) {
+    const sections = document.getElementsByClassName('content');
+    for (let i = 0; i < sections.length; i++) {
+      sections[i].style.display = 'none';
+    }
+    const selectedSection = document.getElementById(sectionId);
+    selectedSection.style.display = 'block';
+  }
+
+  // Automatically show the first section on page load
+  window.onload = () => showSection('heuristic');
+</script>
+</body>
+</html>
